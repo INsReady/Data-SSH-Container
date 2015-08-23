@@ -1,10 +1,18 @@
 # A custom data container with SSHd service
 #
 
-FROM ubuntu:latest
+FROM php:5.6-cli
 MAINTAINER Jingsheng Wang <jingsheng.wang@insready.com>
 
-RUN apt-get update && apt-get install -y openssh-server git nano
+RUN apt-get update && apt-get install -y openssh-server git nano libpng12-dev libjpeg-dev libpq-dev \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+	&& docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+
 RUN mkdir /var/run/sshd
 # RUN echo 'root:password' | chpasswd
 
@@ -19,6 +27,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 WORKDIR /var/www/html
 
 # The custom entrypoint is used to link all host read-only files
+RUN mkdir /data
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

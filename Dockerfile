@@ -15,6 +15,7 @@ RUN mv composer.phar /usr/local/bin/composer
 
 RUN mkdir /var/run/sshd
 # RUN echo 'root:password' | chpasswd
+RUN sed -i 's/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd

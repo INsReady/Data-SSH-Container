@@ -4,7 +4,7 @@
 FROM php:5.6-cli
 MAINTAINER Jingsheng Wang <jingsheng.wang@insready.com>
 
-RUN apt-get update && apt-get install -y openssh-server git nano libpng12-dev libjpeg-dev libpq-dev \
+RUN apt-get update && apt-get install -y openssh-server git nano libpng12-dev libjpeg-dev libpq-dev mariadb-client \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	&& docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip

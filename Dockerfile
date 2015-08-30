@@ -7,7 +7,7 @@ MAINTAINER Jingsheng Wang <jingsheng.wang@insready.com>
 RUN apt-get update && apt-get install -y openssh-server git nano libpng12-dev libjpeg-dev libpq-dev mariadb-client \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-	&& docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip
+	&& docker-php-ext-install gd mbstring pdo pdo_mysql pdo_pgsql zip bcmath
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php

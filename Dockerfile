@@ -1,7 +1,7 @@
 # A custom data container with SSHd service
 #
 
-FROM php:5.6-cli
+FROM php
 MAINTAINER Jingsheng Wang <jingsheng.wang@insready.com>
 
 RUN apt-get update && apt-get install -y openssh-server git nano libpng12-dev libjpeg-dev libpq-dev mariadb-client \
